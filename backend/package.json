@@ -1,0 +1,27 @@
+{
+  "name": "mike-assistant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://lvidal1@github.com/lvidal1/mike-assistant.git"
+  },
+  "keywords": [],
+  "author": "lvidal1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lvidal1/mike-assistant/issues"
+  },
+  "homepage": "https://github.com/lvidal1/mike-assistant#readme",
+  "dependencies": {
+    "@google-cloud/text-to-speech": "^4.2.0",
+    "axios": "^1.3.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
