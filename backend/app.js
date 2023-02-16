@@ -1,8 +1,9 @@
+require('dotenv').config()
 
 const express = require('express');
-const GoogleSpeechToTextService = require('./services/TextToSpeechService/GoogleService');
 const app = express();
 const cors = require('cors');
+const AmazonPollyService = require('./services/TextToSpeechService/AmazonPollyService');
 
 app.use(cors({
     origin: '*'
@@ -13,14 +14,15 @@ app.get('/text-to-speech/:text', (req, res) => {
     const text = req.params.text;
     const language = req.query.language || 'es';
 
-    const textToSpeechService = new GoogleSpeechToTextService();
+    //const textToSpeechService = new GoogleSpeechToTextService();
+    const textToSpeechService = new AmazonPollyService();
 
     console.log(textToSpeechService)
     textToSpeechService
         .convertTextToSpeech(text, language)
-        .then(audioData => {
-            res.setHeader('Content-Type', 'audio/wav');
-            res.send(audioData);
+        .then((response) => {
+            res.setHeader('Content-Type', "audio/wav");
+            res.send(response);
         })
         .catch(error => {
             console.log(error.message)
