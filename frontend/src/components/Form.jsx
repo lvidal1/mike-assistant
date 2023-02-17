@@ -2,22 +2,29 @@ import React, { useState } from 'react';
 
 const Form = () => {
     const [text, setText] = useState('');
-    const API_URL = "http://localhost:3000"
+    const API_URL = "http://localhost:8000"
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const response = await fetch(`${API_URL}/text-to-speech/${text}`);
+            const response = await fetch(`${API_URL}/tts/repeat`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text }),
+            });
 
-            if (response.status === 200) {
-                const audioBlob = await response.blob();
-                const audioUrl = URL.createObjectURL(audioBlob);
-                const audio = new Audio(audioUrl);
-                audio.play();
-            }
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              
+              const blob = await response.blob();
+              const audio = new Audio(URL.createObjectURL(blob));
+              audio.play();
         } catch (error) {
-            console.error(error);
+            console.error('There was an error:', error);
         }
     };
 
