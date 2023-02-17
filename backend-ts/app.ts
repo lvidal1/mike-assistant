@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import compression from "compression";
 import userRoutes from "./src/routes/userRoutes";
+import ttsRouter from "./src/routes/ttsRoutes";
 
 class App {
   public app: Application;
@@ -25,6 +26,7 @@ class App {
 
   private routes() {
     this.app.use("/", userRoutes);
+    this.app.use("/tts", ttsRouter);
   }
 
   public listen() {
