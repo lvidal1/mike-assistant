@@ -1,5 +1,8 @@
 import express, { Application } from "express";
 import cors from "cors";
+import morgan from "morgan";
+import compression from "compression";
+import userRoutes from "./src/routes/userRoutes";
 
 class App {
   public app: Application;
@@ -10,11 +13,18 @@ class App {
     this.port = port;
 
     this.middleware();
+    this.routes();
   }
 
   private middleware() {
     this.app.use(express.json());
     this.app.use(cors());
+    this.app.use(morgan("dev"));
+    this.app.use(compression());
+  }
+
+  private routes() {
+    this.app.use("/", userRoutes);
   }
 
   public listen() {
