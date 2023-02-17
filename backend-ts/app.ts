@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cors from "cors";
 
 class App {
   public app: Application;
@@ -13,6 +14,7 @@ class App {
 
   private middleware() {
     this.app.use(express.json());
+    this.app.use(cors());
   }
 
   public listen() {
